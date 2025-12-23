@@ -5,7 +5,12 @@ import Header from '../component/Header';
 import Subtitle from '../component/Subtitle';
 import Button from '../component/Button';
 import Input from '../component/Input';
+import { setUserDetails } from '../redux/slices/userSlice';
+import { useDispatch } from 'react-redux';
+
 export default function UserDetails({ navigation }) {
+
+  const dispatch = useDispatch();
 
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
@@ -13,7 +18,17 @@ export default function UserDetails({ navigation }) {
   const [pin, setPin] = useState('');  
   const isValid = name.trim() !== '' && (address.trim() !== '' || address2.trim() !== '') && pin.trim() !== '';
 
+const handleNext = () => {
+    dispatch(
+      setUserDetails({
+        name,
+        address: address || address2,
+        pin,
+      })
+    );
 
+    navigation.navigate('SportsDetails');
+  };
   return (
     <Wrapper>
       
@@ -35,6 +50,8 @@ export default function UserDetails({ navigation }) {
                                    onChangeText={setName}
                                    placeholder="Enter your name"
                                    showCountryCode={false}
+                                     keyboardType="default"
+
                                />
                            </View>
             <View className="w-full mt-4 gap-2 mb-4">
@@ -49,12 +66,15 @@ export default function UserDetails({ navigation }) {
                                    onChangeText={setAddress}
                                    placeholder="Enter your address"
                                    showCountryCode={false}
+                                     keyboardType="default"
                                />
                            <Input
                                    value={address2}
                                    onChangeText={setAddress2}
                                    placeholder="Enter your address"
                                    showCountryCode={false}
+                                     keyboardType="default"
+
                                />
                            </View>
         <View className="w-full mt-2 gap-2">
@@ -69,6 +89,7 @@ export default function UserDetails({ navigation }) {
                                    onChangeText={setPin}
                                    placeholder="Enter your pin code"
                                    showCountryCode={false}
+                                        keyboardType={"phone-pad"}
                                />
                            </View>
     
@@ -78,7 +99,7 @@ export default function UserDetails({ navigation }) {
                               <Button
                                   title="Next"
                                   disabled={!isValid}
-                                  onPress={() => navigation.navigate('SportsDetails')}
+                                  onPress={handleNext}
                               />
                           </View>
         </View>

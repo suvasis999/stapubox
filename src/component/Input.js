@@ -9,6 +9,7 @@ export default function Input({
   showCountryCode = false,
   multiline = false,
   numberOfLines = 4,
+  keyboardType,
 }) {
   const [open, setOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('+91');
@@ -51,7 +52,7 @@ export default function Input({
           onChangeText={onChangeText}
           placeholder={placeholder}
           placeholderTextColor="#8A8A8A"
-          keyboardType={multiline ? 'default' : 'number-pad'}
+          keyboardType={keyboardType || 'default'}
           multiline={multiline}
           numberOfLines={multiline ? numberOfLines : 1}
           textAlignVertical={multiline ? 'top' : 'center'}

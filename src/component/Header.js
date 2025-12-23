@@ -64,7 +64,7 @@ export default function Header({
       <View className="w-10 items-end">
         {showLogout && (
           <TouchableOpacity onPress={onLogout}>
-            <Ionicons name="log-out-outline" size={24} color="#dc2626" />
+            <Ionicons name="log-out-outline" size={24} color="#ffffff" />
           </TouchableOpacity>
         )}
       </View>
